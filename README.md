@@ -1,0 +1,1 @@
+# fiap_ia_2025_f_2_cap_6_python_and_beyond
