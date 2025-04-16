@@ -42,7 +42,7 @@ def criar(nome, hectar):
             [nome, hectar, id_var]
         )
         conexao.commit()
-        return id_var.getvalue()
+        return id_var.getvalue()[0]
     except Exception as e:
         print(f"Erro ao criar área: {str(e)}")
         return False

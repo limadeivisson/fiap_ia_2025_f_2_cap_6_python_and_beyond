@@ -7,7 +7,6 @@ def exibir_menu():
     print('0. Sair')
     print('\nEscolha uma opção: ', end='')
 
-
 def main():
     while True:
         try:
