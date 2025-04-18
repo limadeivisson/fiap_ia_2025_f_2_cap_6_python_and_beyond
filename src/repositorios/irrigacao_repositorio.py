@@ -32,17 +32,18 @@ def pegar_por_id(id):
         if 'conexao' in locals():
             conexao.close()
 
-def criar(plantio_id, data_irrigacao, quantidade_irrigacao_l_m2):
+def criar(plantio_id, data_irrigacao, volume_agua_l):
     try:
         conexao = pegar_conexao()
         cursor = conexao.cursor()
+        id_var = cursor.var(int)
         cursor.execute(
-            'INSERT INTO irrigacao (plantio_id, data_irrigacao, quantidade_irrigacao_l_m2) VALUES (:1, :2, :3) RETURNING id INTO :4',
-            [plantio_id, data_irrigacao, quantidade_irrigacao_l_m2, cursor.var(int)]
+            'INSERT INTO irrigacao (plantio_id, data_irrigacao, volume_agua_l) VALUES (:1, :2, :3) RETURNING id INTO :4',
+            [plantio_id, data_irrigacao, volume_agua_l, id_var]
         )
-        id = cursor.var.getvalue()
+        id = id_var.getvalue()
         conexao.commit()
-        return True
+        return id
     except Exception as e:
         print(f"Erro ao criar irrigação: {str(e)}")
         return False

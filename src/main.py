@@ -1,9 +1,15 @@
 from visualizacoes.menu_areas_visualizacao import menu_areas
+from visualizacoes.menu_culturas_visualizacao import menu_culturas
+from visualizacoes.menu_plantios_visualizacao import menu_plantios
+from visualizacoes.menu_irrigacoes_visualizacao import menu_irrigacoes
 import os
 
 def exibir_menu():
     print('\n=== Menu Principal ===\n')
     print('1. Áreas')
+    print('2. Culturas')
+    print('3. Plantios')
+    print('4. Irrigações')
     print('0. Sair')
     print('\nEscolha uma opção: ', end='')
 
@@ -16,6 +22,12 @@ def main():
             match opcao:
                 case '1':
                     menu_areas()
+                case '2':
+                    menu_culturas()
+                case '3':
+                    menu_plantios()
+                case '4':
+                    menu_irrigacoes()
                 case '0':
                     print('\nSaindo do sistema...')
                     break

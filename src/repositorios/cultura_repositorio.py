@@ -32,17 +32,18 @@ def pegar_por_id(id):
         if 'conexao' in locals():
             conexao.close()
 
-def criar(nome, coeficiente_kc, profundidade_raiz_cm, consumo_hidrico_diario_l_m2):
+def criar(nome, consumo_hidrico_diario_l_m2):
     try:
         conexao = pegar_conexao()
         cursor = conexao.cursor()
+        id_var = cursor.var(int)
         cursor.execute(
-            'INSERT INTO cultura (nome, coeficiente_kc, profundidade_raiz_cm, consumo_hidrico_diario_l_m2) VALUES (:1, :2, :3, :4) RETURNING id INTO :5',
-            [nome, coeficiente_kc, profundidade_raiz_cm, consumo_hidrico_diario_l_m2, cursor.var(int)]
+            'INSERT INTO cultura (nome, consumo_hidrico_diario_l_m2) VALUES (:1, :2) RETURNING id INTO :3',
+            (nome, consumo_hidrico_diario_l_m2, id_var)
         )
-        id = cursor.var.getvalue()
+        id = id_var.getvalue()
         conexao.commit()
-        return True
+        return id
     except Exception as e:
         print(f"Erro ao criar cultura: {str(e)}")
         return False
@@ -52,13 +53,13 @@ def criar(nome, coeficiente_kc, profundidade_raiz_cm, consumo_hidrico_diario_l_m
         if 'conexao' in locals():
             conexao.close()
 
-def atualizar_por_id(id, nome, coeficiente_kc, profundidade_raiz_cm, consumo_hidrico_diario_l_m2):
+def atualizar_por_id(id, nome, consumo_hidrico_diario_l_m2):
     try:
         conexao = pegar_conexao()
         cursor = conexao.cursor()
         cursor.execute(
-            'UPDATE cultura SET nome = :1, coeficiente_kc = :2, profundidade_raiz_cm = :3, consumo_hidrico_diario_l_m2 = :4 WHERE id = :5',
-            [nome, coeficiente_kc, profundidade_raiz_cm, consumo_hidrico_diario_l_m2, id]
+            'UPDATE cultura SET nome = :1, consumo_hidrico_diario_l_m2 = :2 WHERE id = :3',
+            (nome, consumo_hidrico_diario_l_m2, id)
         )
         conexao.commit()
         return cursor.rowcount > 0
@@ -75,7 +76,7 @@ def deletar_por_id(id):
     try:
         conexao = pegar_conexao()
         cursor = conexao.cursor()
-        cursor.execute('DELETE FROM cultura WHERE id = :1', [id])
+        cursor.execute('DELETE FROM cultura WHERE id = :1', (id,))
         conexao.commit()
         return cursor.rowcount > 0
     except Exception as e:

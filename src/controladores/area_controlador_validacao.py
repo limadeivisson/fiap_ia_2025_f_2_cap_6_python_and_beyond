@@ -1,11 +1,13 @@
 from validadores.tipo_validador import validar_string, validar_decimal
 
 def validar_id_area(id):
-    if not validar_string(id) or not id.strip():
-        return "O ID da área não pode estar vazio"
-    if len(id.strip()) > 50:
-        return "O ID da área não pode exceder 50 caracteres"
-    return None
+    try:
+        int(id)
+        if not id.strip() or len(id.strip()) > 50:
+            raise ValueError()
+        return None
+    except ValueError:
+        return "ID inválido!"
 
 def validar_pegar_area_por_id(id):
     return validar_id_area(id)
