@@ -13,9 +13,9 @@ def pegar_plantios():
             'id': plantio[0],
             'nome': plantio[1],
             'observacao': plantio[2],
-            'area_id': plantio[3],
-            'cultura_id': plantio[4],
-            'data_plantio': plantio[5].strftime('%Y-%m-%d')
+            'area': plantio[4],
+            'cultura': plantio[6],
+            'data_plantio': plantio[7].strftime('%Y-%m-%d')
         } for plantio in plantios]
         df = pd.DataFrame(plantios_formatados)
         print('\nPlantios Cadastrados\n')
@@ -37,9 +37,9 @@ def pegar_plantio_por_id(id):
             'id': plantio[0],
             'nome': plantio[1],
             'observacao': plantio[2],
-            'area_id': plantio[3],
-            'cultura_id': plantio[4],
-            'data_plantio': plantio[5].strftime('%Y-%m-%d')
+            'area': plantio[4],
+            'cultura': plantio[6],
+            'data_plantio': plantio[7].strftime('%Y-%m-%d')
         }
         df = pd.DataFrame([plantio_formatado])
         print('\nPlantio Encontrado\n')
@@ -64,9 +64,9 @@ def criar_plantio(nome, observacao, area_id, cultura_id, data_plantio_input):
                 'id': plantio[0],
                 'nome': plantio[1],
                 'observacao': plantio[2],
-                'area_id': plantio[3],
-                'cultura_id': plantio[4],
-                'data_plantio': plantio[5].strftime('%Y-%m-%d')
+                'area': plantio[4],
+                'cultura': plantio[6],
+                'data_plantio': plantio[7].strftime('%Y-%m-%d')
             }
             df = pd.DataFrame([plantio_formatado])
             print('\nPlantio criado:')
@@ -98,9 +98,9 @@ def atualizar_plantio_por_id(id, nome, observacao, area_id, cultura_id, data_pla
                 'id': plantio_atualizado[0],
                 'nome': plantio_atualizado[1],
                 'observacao': plantio_atualizado[2],
-                'area_id': plantio_atualizado[3],
-                'cultura_id': plantio_atualizado[4],
-                'data_plantio': plantio_atualizado[5].strftime('%Y-%m-%d')
+                'area': plantio_atualizado[4],
+                'cultura': plantio_atualizado[6],
+                'data_plantio': plantio_atualizado[7].strftime('%Y-%m-%d')
             }
             df = pd.DataFrame([plantio_formatado])
             print('\nPlantio atualizado:')

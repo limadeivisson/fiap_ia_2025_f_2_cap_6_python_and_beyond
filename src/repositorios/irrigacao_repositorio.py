@@ -4,7 +4,11 @@ def pegar():
     try:
         conexao = pegar_conexao()
         cursor = conexao.cursor()
-        cursor.execute('SELECT * FROM irrigacao')
+        cursor.execute('''
+            SELECT i.id, i.plantio_id, p.nome as plantio_nome, i.data_irrigacao, i.volume_agua_l
+            FROM irrigacao i
+            JOIN plantio p ON i.plantio_id = p.id
+        ''')
         irrigacoes = cursor.fetchall()
         return irrigacoes
     except Exception as e:
@@ -20,7 +24,12 @@ def pegar_por_id(id):
     try:
         conexao = pegar_conexao()
         cursor = conexao.cursor()
-        cursor.execute('SELECT * FROM irrigacao WHERE id = :1', [id])
+        cursor.execute('''
+            SELECT i.id, i.plantio_id, p.nome as plantio_nome, i.data_irrigacao, i.volume_agua_l
+            FROM irrigacao i
+            JOIN plantio p ON i.plantio_id = p.id
+            WHERE i.id = :1
+        ''', [id])
         irrigacao = cursor.fetchone()
         return irrigacao
     except Exception as e:
