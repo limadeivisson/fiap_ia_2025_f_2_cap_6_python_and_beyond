@@ -19,13 +19,11 @@ def pegar_cultura_por_id(id):
     cultura = cultura_repositorio.pegar_por_id(id)
     if cultura is None:
         raise Exception("Cultura não encontrada")
-    cultura_formatada = {
+    return {
         'id': cultura[0],
         'nome': cultura[1],
         'consumo_hidrico_diario_l_m2': cultura[2]
     }
-    df = pd.DataFrame([cultura_formatada])
-    return df.to_string(index=False)
 
 def criar_cultura(nome, consumo_hidrico_diario_l_m2_input):
     validar_criar_cultura(nome, consumo_hidrico_diario_l_m2_input)
@@ -33,13 +31,11 @@ def criar_cultura(nome, consumo_hidrico_diario_l_m2_input):
     id_cultura = cultura_repositorio.criar(nome, consumo_hidrico_diario_l_m2)
     if id_cultura:
         cultura = cultura_repositorio.pegar_por_id(id_cultura[0])
-        cultura_formatada = {
+        return {
             'id': cultura[0],
             'nome': cultura[1],
             'consumo_hidrico_diario_l_m2': cultura[2]
         }
-        df = pd.DataFrame([cultura_formatada])
-        return df.to_string(index=False)
 
 def atualizar_cultura_por_id(id, nome, consumo_hidrico_diario_l_m2_input):
     validar_atualizar_cultura(id, nome, consumo_hidrico_diario_l_m2_input)
@@ -49,13 +45,11 @@ def atualizar_cultura_por_id(id, nome, consumo_hidrico_diario_l_m2_input):
     consumo_hidrico_diario_l_m2 = float(consumo_hidrico_diario_l_m2_input)
     if cultura_repositorio.atualizar_por_id(id, nome, consumo_hidrico_diario_l_m2):
         cultura_atualizada = cultura_repositorio.pegar_por_id(id)
-        cultura_formatada = {
+        return {
             'id': cultura_atualizada[0],
             'nome': cultura_atualizada[1],
             'consumo_hidrico_diario_l_m2': cultura_atualizada[2]
         }
-        df = pd.DataFrame([cultura_formatada])
-        return df.to_string(index=False)
     else:
         raise Exception("Erro ao atualizar cultura!")
 

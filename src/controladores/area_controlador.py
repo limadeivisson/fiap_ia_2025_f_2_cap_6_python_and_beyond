@@ -20,14 +20,12 @@ def pegar_area_por_id(id):
     area = area_repositorio.pegar_por_id(id)
     if area is None:
         raise Exception("Área não encontrada")
-    area_formatada = {
+    return {
         'id': area[0],
         'nome': area[1],
         'localizacao': area[2],
         'hectar': area[3]
     }
-    df = pd.DataFrame([area_formatada])
-    return df.to_string(index=False)
 
 def criar_area(nome, localizacao, hectar_input):
     validar_criar_area(nome, localizacao, hectar_input)
@@ -35,14 +33,12 @@ def criar_area(nome, localizacao, hectar_input):
     id_area = area_repositorio.criar(nome, localizacao, hectar)
     if id_area:
         area = area_repositorio.pegar_por_id(id_area)
-        area_formatada = {
+        return {
             'id': area[0],
             'nome': area[1],
             'localizacao': area[2],
             'hectar': area[3]
         }
-        df = pd.DataFrame([area_formatada])
-        return df.to_string(index=False)
     else:
         raise Exception("Erro ao criar área!")
 
@@ -54,14 +50,12 @@ def atualizar_area_por_id(id, nome, localizacao, hectar_input):
     hectar = float(hectar_input)
     if area_repositorio.atualizar_por_id(id, nome, localizacao, hectar):
         area_atualizada = area_repositorio.pegar_por_id(id)
-        area_formatada = {
+        return {
             'id': area_atualizada[0],
             'nome': area_atualizada[1],
             'localizacao': area_atualizada[2],
             'hectar': area_atualizada[3]
         }
-        df = pd.DataFrame([area_formatada])
-        return df.to_string(index=False)
     else:
         raise Exception("Erro ao atualizar área!")
 

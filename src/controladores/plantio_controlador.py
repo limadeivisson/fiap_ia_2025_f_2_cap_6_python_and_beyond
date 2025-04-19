@@ -23,7 +23,7 @@ def pegar_plantio_por_id(id):
     plantio = plantio_repositorio.pegar_por_id(id)
     if plantio is None:
         raise Exception("Plantio não encontrado")
-    plantio_formatado = {
+    return {
         'id': plantio[0],
         'nome': plantio[1],
         'observacao': plantio[2],
@@ -31,8 +31,6 @@ def pegar_plantio_por_id(id):
         'cultura': plantio[6],
         'data_plantio': plantio[7].strftime('%Y-%m-%d')
     }
-    df = pd.DataFrame([plantio_formatado])
-    return df.to_string(index=False)
 
 def criar_plantio(nome, observacao, area_id, cultura_id, data_plantio_input):
     validar_plantio(nome, observacao, area_id, cultura_id, data_plantio_input)
@@ -40,7 +38,7 @@ def criar_plantio(nome, observacao, area_id, cultura_id, data_plantio_input):
     id_plantio = plantio_repositorio.criar(nome, observacao, area_id, cultura_id, data_plantio)
     if id_plantio:
         plantio = plantio_repositorio.pegar_por_id(id_plantio[0])
-        plantio_formatado = {
+        return {
             'id': plantio[0],
             'nome': plantio[1],
             'observacao': plantio[2],
@@ -48,8 +46,6 @@ def criar_plantio(nome, observacao, area_id, cultura_id, data_plantio_input):
             'cultura': plantio[6],
             'data_plantio': plantio[7].strftime('%Y-%m-%d')
         }
-        df = pd.DataFrame([plantio_formatado])
-        return df.to_string(index=False)
     else:
         raise Exception("Erro ao criar plantio")
 
@@ -61,7 +57,7 @@ def atualizar_plantio_por_id(id, nome, observacao, area_id, cultura_id, data_pla
     data_plantio = datetime.strptime(data_plantio_input, '%Y-%m-%d')
     if plantio_repositorio.atualizar_por_id(id, nome, observacao, area_id, cultura_id, data_plantio):
         plantio_atualizado = plantio_repositorio.pegar_por_id(id)
-        plantio_formatado = {
+        return {
             'id': plantio_atualizado[0],
             'nome': plantio_atualizado[1],
             'observacao': plantio_atualizado[2],
@@ -69,8 +65,6 @@ def atualizar_plantio_por_id(id, nome, observacao, area_id, cultura_id, data_pla
             'cultura': plantio_atualizado[6],
             'data_plantio': plantio_atualizado[7].strftime('%Y-%m-%d')
         }
-        df = pd.DataFrame([plantio_formatado])
-        return df.to_string(index=False)
     else:
         raise Exception("Erro ao atualizar plantio")
 

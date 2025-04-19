@@ -29,7 +29,9 @@ def menu_culturas():
                     id = input('\nDigite o ID da cultura: ')
                     cultura = pegar_cultura_por_id(id)
                     print('\nCulturas Encontrada\n')
-                    print(cultura)
+                    print("ID:", cultura["id"])
+                    print("Nome:", cultura["nome"])
+                    print("Consumo Hídrico Diário (L/m²):", cultura["consumo_hidrico_diario_l_m2"])
                 case '3':
                     print('\n=== Cadastrar Nova Cultura ===')
                     nome = input('\nDigite o nome da cultura: ')
@@ -37,7 +39,9 @@ def menu_culturas():
                     cultura = criar_cultura(nome, consumo_hidrico)
                     print('\nCultura Criada com Sucesso!')
                     print('\nCultura criada:')
-                    print(cultura)
+                    print("ID:", cultura["id"])
+                    print("Nome:", cultura["nome"])
+                    print("Consumo Hídrico Diário (L/m²):", cultura["consumo_hidrico_diario_l_m2"])
                 case '4':
                     print('\n=== Alterar Cultura ===')
                     id = input('\nDigite o ID da cultura: ')
@@ -46,7 +50,9 @@ def menu_culturas():
                     cultura = atualizar_cultura_por_id(id, nome, consumo_hidrico)
                     print('\nCultura atualizada com sucesso!')
                     print('\nCultura atualizada:')
-                    print(cultura)
+                    print("ID:", cultura["id"])
+                    print("Nome:", cultura["nome"])
+                    print("Consumo Hídrico Diário (L/m²):", cultura["consumo_hidrico_diario_l_m2"])
                 case '5':
                     print('\n=== Deletar Cultura ===')
                     id = input('\nDigite o ID da cultura: ')

@@ -19,15 +19,13 @@ def pegar_feedback_por_id(id):
     feedback = feedback_repositorio.pegar_por_id(id)
     if feedback is None:
         raise Exception("Feedback não encontrado")
-    feedback_formatado = {
+    return {
         'id': feedback[0],
         'cultura_id': feedback[1],
         'message_feedback': feedback[2],
         'tips': feedback[3],
         'percent': feedback[4]
     }
-    df = pd.DataFrame([feedback_formatado])
-    return df.to_string(index=False)
 
 def criar_feedback(cultura_id, message_feedback, tips, percent_input):
     validar_feedback(cultura_id, message_feedback, tips, percent_input)
@@ -35,15 +33,13 @@ def criar_feedback(cultura_id, message_feedback, tips, percent_input):
     id_feedback = feedback_repositorio.criar(cultura_id, message_feedback, tips, percent)
     if id_feedback:
         feedback = feedback_repositorio.pegar_por_id(id_feedback)
-        feedback_formatado = {
+        return {
             'id': feedback[0],
             'cultura_id': feedback[1],
             'message_feedback': feedback[2],
             'tips': feedback[3],
             'percent': feedback[4]
         }
-        df = pd.DataFrame([feedback_formatado])
-        return df.to_string(index=False)
     else:
         raise Exception("Erro ao criar feedback!")
 
@@ -55,15 +51,13 @@ def atualizar_feedback_por_id(id, cultura_id, message_feedback, tips, percent_in
     percent = float(percent_input)
     if feedback_repositorio.atualizar_por_id(id, cultura_id, message_feedback, tips, percent):
         feedback_atualizado = feedback_repositorio.pegar_por_id(id)
-        feedback_formatado = {
+        return {
             'id': feedback_atualizado[0],
             'cultura_id': feedback_atualizado[1],
             'message_feedback': feedback_atualizado[2],
             'tips': feedback_atualizado[3],
             'percent': feedback_atualizado[4]
         }
-        df = pd.DataFrame([feedback_formatado])
-        return df.to_string(index=False)
     else:
         raise Exception("Erro ao atualizar feedback!")
 
