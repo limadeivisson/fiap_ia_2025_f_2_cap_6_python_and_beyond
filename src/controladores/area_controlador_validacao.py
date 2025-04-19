@@ -12,9 +12,12 @@ def validar_id_area(id):
 def validar_pegar_area_por_id(id):
     return validar_id_area(id)
 
-def validar_criar_area(nome, hectar_input):
+def validar_criar_area(nome, localizacao, hectar_input):
     if not validar_string(nome) or not nome.strip():
         return "O nome da área não pode estar vazio"
+
+    if not validar_string(localizacao) or not localizacao.strip():
+        return "A localização da área não pode estar vazia"
         
     if not hectar_input.strip():
         return "O tamanho em hectares não pode estar vazio"
@@ -28,13 +31,16 @@ def validar_criar_area(nome, hectar_input):
     
     return None
 
-def validar_atualizar_area(id, nome, hectar_input):
+def validar_atualizar_area(id, nome, localizacao, hectar_input):
     erro_id = validar_id_area(id)
     if erro_id:
         return erro_id
         
     if not validar_string(nome) or not nome.strip():
         return "O nome da área não pode estar vazio"
+
+    if not validar_string(localizacao) or not localizacao.strip():
+        return "A localização da área não pode estar vazia"
         
     if not hectar_input.strip():
         return "O tamanho em hectares não pode estar vazio"

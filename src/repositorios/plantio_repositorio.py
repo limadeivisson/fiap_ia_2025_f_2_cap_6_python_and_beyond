@@ -32,14 +32,14 @@ def pegar_por_id(id):
         if 'conexao' in locals():
             conexao.close()
 
-def criar(area_id, cultura_id, data_plantio):
+def criar(nome, observacao, area_id, cultura_id, data_plantio):
     try:
         conexao = pegar_conexao()
         cursor = conexao.cursor()
         id_var = cursor.var(int)
         cursor.execute(
-            'INSERT INTO plantio (area_id, cultura_id, data_plantio) VALUES (:1, :2, :3) RETURNING id INTO :4',
-            [area_id, cultura_id, data_plantio, id_var]
+            'INSERT INTO plantio (nome, observacao, area_id, cultura_id, data_plantio) VALUES (:1, :2, :3, :4, :5) RETURNING id INTO :6',
+            [nome, observacao, area_id, cultura_id, data_plantio, id_var]
         )
         id = id_var.getvalue()
         conexao.commit()
@@ -53,13 +53,13 @@ def criar(area_id, cultura_id, data_plantio):
         if 'conexao' in locals():
             conexao.close()
 
-def atualizar_por_id(id, area_id, cultura_id, data_plantio):
+def atualizar_por_id(id, nome, observacao, area_id, cultura_id, data_plantio):
     try:
         conexao = pegar_conexao()
         cursor = conexao.cursor()
         cursor.execute(
-            'UPDATE plantio SET area_id = :1, cultura_id = :2, data_plantio = :3 WHERE id = :4',
-            [area_id, cultura_id, data_plantio, id]
+            'UPDATE plantio SET nome = :1, observacao = :2, area_id = :3, cultura_id = :4, data_plantio = :5 WHERE id = :6',
+            [nome, observacao, area_id, cultura_id, data_plantio, id]
         )
         conexao.commit()
         return cursor.rowcount > 0

@@ -11,7 +11,8 @@ def pegar_areas():
         areas_formatadas = [{
             'id': area[0],
             'nome': area[1],
-            'hectar': area[2]
+            'localizacao': area[2],
+            'hectar': area[3]
         } for area in areas]
         df = pd.DataFrame(areas_formatadas)
         print('\nÁreas Cadastradas\n')
@@ -32,7 +33,8 @@ def pegar_area_por_id(id):
         area_formatada = {
             'id': area[0],
             'nome': area[1],
-            'hectar': area[2]
+            'localizacao': area[2],
+            'hectar': area[3]
         }
         df = pd.DataFrame([area_formatada])
         print('\nÁrea Encontrada\n')
@@ -40,22 +42,23 @@ def pegar_area_por_id(id):
     except Exception as e:
         print(f'\nErro ao buscar área: {str(e)}')
 
-def criar_area(nome, hectar_input):
+def criar_area(nome, localizacao, hectar_input):
     try:
-        erro = validar_criar_area(nome, hectar_input)
+        erro = validar_criar_area(nome, localizacao, hectar_input)
         if erro:
             print(f'\nErro: {erro}')
             return
             
         hectar = float(hectar_input)
-        id_area = area_repositorio.criar(nome, hectar)
+        id_area = area_repositorio.criar(nome, localizacao, hectar)
         if id_area:
             print('\nÁrea Criada com Sucesso!')
             area = area_repositorio.pegar_por_id(id_area)
             area_formatada = {
                 'id': area[0],
                 'nome': area[1],
-                'hectar': area[2]
+                'localizacao': area[2],
+                'hectar': area[3]
             }
             df = pd.DataFrame([area_formatada])
             print('\nÁrea criada:')
@@ -67,9 +70,9 @@ def criar_area(nome, hectar_input):
     except Exception as e:
         print(f'\nErro ao criar área: {str(e)}')
 
-def atualizar_area_por_id(id, nome, hectar_input):
+def atualizar_area_por_id(id, nome, localizacao, hectar_input):
     try:
-        erro = validar_atualizar_area(id, nome, hectar_input)
+        erro = validar_atualizar_area(id, nome, localizacao, hectar_input)
         if erro:
             print(f'Erro: {erro}')
             return
@@ -78,13 +81,14 @@ def atualizar_area_por_id(id, nome, hectar_input):
             print('\nÁrea não encontrada')
             return
         hectar = float(hectar_input)
-        if area_repositorio.atualizar_por_id(id, nome, hectar):
+        if area_repositorio.atualizar_por_id(id, nome, localizacao, hectar):
             print('\nÁrea atualizada com sucesso!')
             area_atualizada = area_repositorio.pegar_por_id(id)
             area_formatada = {
                 'id': area_atualizada[0],
                 'nome': area_atualizada[1],
-                'hectar': area_atualizada[2]
+                'localizacao': area_atualizada[2],
+                'hectar': area_atualizada[3]
             }
             df = pd.DataFrame([area_formatada])
             print('\nÁrea atualizada:')

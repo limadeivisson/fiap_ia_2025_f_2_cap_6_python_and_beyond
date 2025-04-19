@@ -11,9 +11,11 @@ def pegar_plantios():
             return
         plantios_formatados = [{
             'id': plantio[0],
-            'area_id': plantio[1],
-            'cultura_id': plantio[2],
-            'data_plantio': plantio[3].strftime('%Y-%m-%d')
+            'nome': plantio[1],
+            'observacao': plantio[2],
+            'area_id': plantio[3],
+            'cultura_id': plantio[4],
+            'data_plantio': plantio[5].strftime('%Y-%m-%d')
         } for plantio in plantios]
         df = pd.DataFrame(plantios_formatados)
         print('\nPlantios Cadastrados\n')
@@ -33,9 +35,11 @@ def pegar_plantio_por_id(id):
             return
         plantio_formatado = {
             'id': plantio[0],
-            'area_id': plantio[1],
-            'cultura_id': plantio[2],
-            'data_plantio': plantio[3].strftime('%Y-%m-%d')
+            'nome': plantio[1],
+            'observacao': plantio[2],
+            'area_id': plantio[3],
+            'cultura_id': plantio[4],
+            'data_plantio': plantio[5].strftime('%Y-%m-%d')
         }
         df = pd.DataFrame([plantio_formatado])
         print('\nPlantio Encontrado\n')
@@ -43,24 +47,26 @@ def pegar_plantio_por_id(id):
     except Exception as e:
         print(f'\nErro ao buscar plantio: {str(e)}')
 
-def criar_plantio(area_id, cultura_id, data_plantio_input):
+def criar_plantio(nome, observacao, area_id, cultura_id, data_plantio_input):
     try:
-        erro = validar_criar_plantio(area_id, cultura_id, data_plantio_input)
+        erro = validar_criar_plantio(nome, observacao, area_id, cultura_id, data_plantio_input)
         if erro:
             print(f'\nErro: {erro}')
             return
             
         data_plantio = datetime.strptime(data_plantio_input, '%Y-%m-%d')
         
-        id_plantio = plantio_repositorio.criar(area_id, cultura_id, data_plantio)
+        id_plantio = plantio_repositorio.criar(nome, observacao, area_id, cultura_id, data_plantio)
         if id_plantio:
             print('\nPlantio Criado com Sucesso!')
             plantio = plantio_repositorio.pegar_por_id(id_plantio[0])
             plantio_formatado = {
                 'id': plantio[0],
-                'area_id': plantio[1],
-                'cultura_id': plantio[2],
-                'data_plantio': plantio[3].strftime('%Y-%m-%d')
+                'nome': plantio[1],
+                'observacao': plantio[2],
+                'area_id': plantio[3],
+                'cultura_id': plantio[4],
+                'data_plantio': plantio[5].strftime('%Y-%m-%d')
             }
             df = pd.DataFrame([plantio_formatado])
             print('\nPlantio criado:')
@@ -72,9 +78,9 @@ def criar_plantio(area_id, cultura_id, data_plantio_input):
     except Exception as e:
         print(f'\nErro ao criar plantio: {str(e)}')
 
-def atualizar_plantio_por_id(id, area_id, cultura_id, data_plantio_input):
+def atualizar_plantio_por_id(id, nome, observacao, area_id, cultura_id, data_plantio_input):
     try:
-        erro = validar_atualizar_plantio(id, area_id, cultura_id, data_plantio_input)
+        erro = validar_atualizar_plantio(id, nome, observacao, area_id, cultura_id, data_plantio_input)
         if erro:
             print(f'Erro: {erro}')
             return
@@ -85,14 +91,16 @@ def atualizar_plantio_por_id(id, area_id, cultura_id, data_plantio_input):
             
         data_plantio = datetime.strptime(data_plantio_input, '%Y-%m-%d')
         
-        if plantio_repositorio.atualizar_por_id(id, area_id, cultura_id, data_plantio):
+        if plantio_repositorio.atualizar_por_id(id, nome, observacao, area_id, cultura_id, data_plantio):
             print('\nPlantio atualizado com sucesso!')
             plantio_atualizado = plantio_repositorio.pegar_por_id(id)
             plantio_formatado = {
                 'id': plantio_atualizado[0],
-                'area_id': plantio_atualizado[1],
-                'cultura_id': plantio_atualizado[2],
-                'data_plantio': plantio_atualizado[3].strftime('%Y-%m-%d')
+                'nome': plantio_atualizado[1],
+                'observacao': plantio_atualizado[2],
+                'area_id': plantio_atualizado[3],
+                'cultura_id': plantio_atualizado[4],
+                'data_plantio': plantio_atualizado[5].strftime('%Y-%m-%d')
             }
             df = pd.DataFrame([plantio_formatado])
             print('\nPlantio atualizado:')

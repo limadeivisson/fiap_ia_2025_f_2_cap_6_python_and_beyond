@@ -25,16 +25,20 @@ def menu_plantios():
                     id = input('\nDigite o ID do plantio: ')
                     pegar_plantio_por_id(id)
                 case '3':
+                    nome = input('\nDigite o nome do plantio: ')
+                    observacao = input('\nDigite a observação do plantio: ')
                     area_id = input('\nDigite o ID da área: ')
                     cultura_id = input('\nDigite o ID da cultura: ')
                     data_plantio = input('\nDigite a data do plantio (YYYY-MM-DD): ')
-                    criar_plantio(area_id, cultura_id, data_plantio)
+                    criar_plantio(nome, observacao, area_id, cultura_id, data_plantio)
                 case '4':
                     id = input('\nDigite o ID do plantio: ')
+                    nome = input('\nDigite o novo nome do plantio: ')
+                    observacao = input('\nDigite a nova observação do plantio: ')
                     area_id = input('\nDigite o novo ID da área: ')
                     cultura_id = input('\nDigite o novo ID da cultura: ')
                     data_plantio = input('\nDigite a nova data do plantio (YYYY-MM-DD): ')
-                    atualizar_plantio_por_id(id, area_id, cultura_id, data_plantio)
+                    atualizar_plantio_por_id(id, nome, observacao, area_id, cultura_id, data_plantio)
                 case '5':
                     id = input('\nDigite o ID do plantio: ')
                     deletar_plantio_por_id(id)

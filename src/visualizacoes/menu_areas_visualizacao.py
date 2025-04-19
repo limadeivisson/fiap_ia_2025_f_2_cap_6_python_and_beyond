@@ -26,13 +26,15 @@ def menu_areas():
                     pegar_area_por_id(id)
                 case '3':
                     nome = input('\nDigite o nome da área: ')
+                    localizacao = input('\nDigite a localização da área: ')
                     hectar_input = input('\nDigite o tamanho em hectares: ')
-                    criar_area(nome, hectar_input)
+                    criar_area(nome, localizacao, hectar_input)
                 case '4':
                     id = input('\nDigite o ID da área: ')
                     nome = input('\nDigite o novo nome da área: ')
+                    localizacao = input('\nDigite a nova localização da área: ')
                     hectar_input = input('\nDigite o novo tamanho em hectares: ')
-                    atualizar_area_por_id(id, nome, hectar_input)
+                    atualizar_area_por_id(id, nome, localizacao, hectar_input)
                 case '5':
                     id = input('\nDigite o ID da área: ')
                     deletar_area_por_id(id)

@@ -32,14 +32,14 @@ def pegar_por_id(id):
         if 'conexao' in locals():
             conexao.close()
 
-def criar(nome, hectar):
+def criar(nome, localizacao, hectar):
     try:
         conexao = pegar_conexao()
         cursor = conexao.cursor()
         id_var = cursor.var(int)
         cursor.execute(
-            'INSERT INTO area (nome, hectar) VALUES (:1, :2) RETURNING id INTO :3',
-            [nome, hectar, id_var]
+            'INSERT INTO area (nome, localizacao, hectar) VALUES (:1, :2, :3) RETURNING id INTO :4',
+            [nome, localizacao, hectar, id_var]
         )
         conexao.commit()
         return id_var.getvalue()[0]
@@ -52,13 +52,13 @@ def criar(nome, hectar):
         if 'conexao' in locals():
             conexao.close()
 
-def atualizar_por_id(id, nome, hectar):
+def atualizar_por_id(id, nome, localizacao, hectar):
     try:
         conexao = pegar_conexao()
         cursor = conexao.cursor()
         cursor.execute(
-            'UPDATE area SET nome = :1, hectar = :2 WHERE id = :3',
-            [nome, hectar, id]
+            'UPDATE area SET nome = :1, localizacao = :2, hectar = :3 WHERE id = :4',
+            [nome, localizacao, hectar, id]
         )
         conexao.commit()
         return cursor.rowcount > 0

@@ -5,6 +5,7 @@ from visualizacoes.menu_irrigacoes_visualizacao import menu_irrigacoes
 import os
 
 def exibir_menu():
+    print('\n=== Gestão Hidrica ===')
     print('\n=== Menu Principal ===\n')
     print('1. Áreas')
     print('2. Culturas')

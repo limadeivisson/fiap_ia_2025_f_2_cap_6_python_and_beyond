@@ -14,7 +14,13 @@ def validar_id_plantio(id):
 def validar_pegar_plantio_por_id(id):
     return validar_id_plantio(id)
 
-def validar_criar_plantio(area_id, cultura_id, data_plantio_input):
+def validar_criar_plantio(nome, observacao, area_id, cultura_id, data_plantio_input):
+    if not validar_string(nome) or not nome.strip():
+        return "O nome do plantio não pode estar vazio"
+    
+    if not validar_string(observacao) or not observacao.strip():
+        return "A observação do plantio não pode estar vazia"
+    
     if not validar_string(area_id) or not area_id.strip():
         return "O ID da área não pode estar vazio"
     
@@ -41,12 +47,12 @@ def validar_criar_plantio(area_id, cultura_id, data_plantio_input):
     
     return None
 
-def validar_atualizar_plantio(id, area_id, cultura_id, data_plantio_input):
+def validar_atualizar_plantio(id, nome, observacao, area_id, cultura_id, data_plantio_input):
     erro_id = validar_id_plantio(id)
     if erro_id:
         return erro_id
     
-    return validar_criar_plantio(area_id, cultura_id, data_plantio_input)
+    return validar_criar_plantio(nome, observacao, area_id, cultura_id, data_plantio_input)
 
 def validar_deletar_plantio(id):
     return validar_id_plantio(id)
