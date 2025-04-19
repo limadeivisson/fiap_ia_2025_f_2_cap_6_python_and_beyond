@@ -8,8 +8,7 @@ def pegar():
         culturas = cursor.fetchall()
         return culturas
     except Exception as e:
-        print(f"Erro ao buscar culturas: {str(e)}")
-        return None
+        raise Exception(f"Erro ao buscar culturas: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()
@@ -24,8 +23,7 @@ def pegar_por_id(id):
         cultura = cursor.fetchone()
         return cultura
     except Exception as e:
-        print(f"Erro ao buscar cultura por ID: {str(e)}")
-        return None
+        raise Exception(f"Erro ao buscar cultura por ID: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()
@@ -45,8 +43,7 @@ def criar(nome, consumo_hidrico_diario_l_m2):
         conexao.commit()
         return id
     except Exception as e:
-        print(f"Erro ao criar cultura: {str(e)}")
-        return False
+        raise Exception(f"Erro ao criar cultura: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()
@@ -64,8 +61,7 @@ def atualizar_por_id(id, nome, consumo_hidrico_diario_l_m2):
         conexao.commit()
         return cursor.rowcount > 0
     except Exception as e:
-        print(f"Erro ao atualizar cultura: {str(e)}")
-        return False
+        raise Exception(f"Erro ao atualizar cultura: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()
@@ -80,8 +76,7 @@ def deletar_por_id(id):
         conexao.commit()
         return cursor.rowcount > 0
     except Exception as e:
-        print(f"Erro ao deletar cultura: {str(e)}")
-        return False
+        raise Exception(f"Erro ao deletar cultura: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()

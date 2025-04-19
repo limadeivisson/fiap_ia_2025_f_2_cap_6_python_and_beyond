@@ -20,11 +20,16 @@ def menu_plantios():
             os.system("cls")
             match opcao:
                 case '1':
-                    pegar_plantios()
+                    print('\n=== Plantios Cadastradas ===\n')
+                    plantios = pegar_plantios()
+                    print('\nPlantios Encontradas\n')
+                    print(plantios)
                 case '2':
                     print('\n=== Buscar Plantio ===')
                     id = input('\nDigite o ID do plantio: ')
-                    pegar_plantio_por_id(id)
+                    plantio = pegar_plantio_por_id(id)
+                    print('\nPlantio Encontrado\n')
+                    print(plantio)
                 case '3':
                     print('\n=== Cadastrar Novo Plantio ===')
                     nome = input('\nDigite o nome do plantio: ')
@@ -32,7 +37,10 @@ def menu_plantios():
                     area_id = input('\nDigite o ID da área: ')
                     cultura_id = input('\nDigite o ID da cultura: ')
                     data_plantio = input('\nDigite a data do plantio (YYYY-MM-DD): ')
-                    criar_plantio(nome, observacao, area_id, cultura_id, data_plantio)
+                    plantio = criar_plantio(nome, observacao, area_id, cultura_id, data_plantio)
+                    print('\nPlantio Criado com Sucesso!')
+                    print('\nPlantio criado:')
+                    print(plantio)
                 case '4':
                     print('\n=== Alterar Plantio ===')
                     id = input('\nDigite o ID do plantio: ')
@@ -41,20 +49,23 @@ def menu_plantios():
                     area_id = input('\nDigite o novo ID da área: ')
                     cultura_id = input('\nDigite o novo ID da cultura: ')
                     data_plantio = input('\nDigite a nova data do plantio (YYYY-MM-DD): ')
-                    atualizar_plantio_por_id(id, nome, observacao, area_id, cultura_id, data_plantio)
+                    plantio = atualizar_plantio_por_id(id, nome, observacao, area_id, cultura_id, data_plantio)
+                    print('\nPlantio atualizado com sucesso!')
+                    print('\nPlantio atualizado:')
+                    print(plantio)
                 case '5':
                     print('\n=== Deletar Plantio ===')
                     id = input('\nDigite o ID do plantio: ')
                     deletar_plantio_por_id(id)
+                    print('\nPlantio Deletado com sucesso!')
                 case '0':
                     print('\nSaindo do menu de plantios...')
                     break
                 case _:
-                    os.system("cls")
-                    print('\nOpção inválida!')
-                    print('\nPor favor, escolha uma opção válida.')
+                    raise Exception("Opção inválida!")
         except Exception as e:
-            print(f'\nErro: {str(e)}')
-            print('Por favor, tente novamente.')
+            os.system("cls")
+            print(f'\nERRO')
+            print(f'\n\033[31m{str(e)}\033[0m')
         finally:
             input("\nPressione ENTER")

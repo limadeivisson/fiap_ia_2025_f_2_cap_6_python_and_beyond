@@ -12,8 +12,7 @@ def pegar():
         irrigacoes = cursor.fetchall()
         return irrigacoes
     except Exception as e:
-        print(f"Erro ao buscar irrigações: {str(e)}")
-        return None
+        raise Exception("Erro ao buscar áreas: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()
@@ -33,8 +32,7 @@ def pegar_por_id(id):
         irrigacao = cursor.fetchone()
         return irrigacao
     except Exception as e:
-        print(f"Erro ao buscar irrigação por ID: {str(e)}")
-        return None
+        raise Exception("Erro ao buscar área por ID: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()
@@ -54,8 +52,7 @@ def criar(plantio_id, data_irrigacao, volume_agua_l):
         conexao.commit()
         return id
     except Exception as e:
-        print(f"Erro ao criar irrigação: {str(e)}")
-        return False
+        raise Exception(f"Erro ao criar irrigação: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()
@@ -73,8 +70,7 @@ def atualizar_por_id(id, plantio_id, data_irrigacao, volume_agua_l):
         conexao.commit()
         return cursor.rowcount > 0
     except Exception as e:
-        print(f"Erro ao atualizar irrigação: {str(e)}")
-        return False
+        raise Exception(f"Erro ao atualizar irrigação: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()
@@ -89,8 +85,7 @@ def deletar_por_id(id):
         conexao.commit()
         return cursor.rowcount > 0
     except Exception as e:
-        print(f"Erro ao deletar irrigação: {str(e)}")
-        return False
+        raise Exception(f"Erro ao deletar irrigação: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()

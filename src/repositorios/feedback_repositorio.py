@@ -8,8 +8,7 @@ def pegar():
         feedbacks = cursor.fetchall()
         return feedbacks
     except Exception as e:
-        print(f"Erro ao buscar feedbacks: {str(e)}")
-        return None
+        raise Exception("Erro ao buscar feedbacks: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()
@@ -24,8 +23,7 @@ def pegar_por_id(id):
         feedback = cursor.fetchone()
         return feedback
     except Exception as e:
-        print(f"Erro ao buscar feedback por ID: {str(e)}")
-        return None
+        raise Exception(f"Erro ao buscar feedback por ID: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()
@@ -44,8 +42,7 @@ def criar(cultura_id, message_feedback, tips, percent):
         conexao.commit()
         return id_var.getvalue()[0]
     except Exception as e:
-        print(f"Erro ao criar feedback: {str(e)}")
-        return False
+        raise Exception(f"Erro ao criar feedback: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()
@@ -63,8 +60,7 @@ def atualizar_por_id(id, cultura_id, message_feedback, tips, percent):
         conexao.commit()
         return cursor.rowcount > 0
     except Exception as e:
-        print(f"Erro ao atualizar feedback: {str(e)}")
-        return False
+        raise Exception(f"Erro ao atualizar feedback: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()
@@ -79,8 +75,7 @@ def deletar_por_id(id):
         conexao.commit()
         return cursor.rowcount > 0
     except Exception as e:
-        print(f"Erro ao deletar feedback: {str(e)}")
-        return False
+        raise Exception(f"Erro ao deletar feedback: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()

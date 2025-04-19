@@ -5,8 +5,7 @@ def pegar():
         conexao = pegar_conexao()
         cursor = conexao.cursor()
         cursor.execute('''
-            SELECT p.id, p.nome, p.observacao, p.area_id, a.nome as area_nome,
-                   p.cultura_id, c.nome as cultura_nome, p.data_plantio
+            SELECT p.id, p.nome, p.observacao, p.area_id, a.nome as area_nome, p.cultura_id, c.nome as cultura_nome, p.data_plantio
             FROM plantio p
             JOIN area a ON p.area_id = a.id
             JOIN cultura c ON p.cultura_id = c.id
@@ -14,8 +13,7 @@ def pegar():
         plantios = cursor.fetchall()
         return plantios
     except Exception as e:
-        print(f"Erro ao buscar plantios: {str(e)}")
-        return None
+        raise Exception(f"Erro ao buscar plantios: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()
@@ -27,8 +25,7 @@ def pegar_por_id(id):
         conexao = pegar_conexao()
         cursor = conexao.cursor()
         cursor.execute('''
-            SELECT p.id, p.nome, p.observacao, p.area_id, a.nome as area_nome,
-                   p.cultura_id, c.nome as cultura_nome, p.data_plantio
+            SELECT p.id, p.nome, p.observacao, p.area_id, a.nome as area_nome, p.cultura_id, c.nome as cultura_nome, p.data_plantio
             FROM plantio p
             JOIN area a ON p.area_id = a.id
             JOIN cultura c ON p.cultura_id = c.id
@@ -37,8 +34,7 @@ def pegar_por_id(id):
         plantio = cursor.fetchone()
         return plantio
     except Exception as e:
-        print(f"Erro ao buscar plantio por ID: {str(e)}")
-        return None
+        raise Exception(f"Erro ao buscar plantio por ID: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()
@@ -58,8 +54,7 @@ def criar(nome, observacao, area_id, cultura_id, data_plantio):
         conexao.commit()
         return id
     except Exception as e:
-        print(f"Erro ao criar plantio: {str(e)}")
-        return False
+        raise Exception(f"Erro ao criar plantio: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()
@@ -77,8 +72,7 @@ def atualizar_por_id(id, nome, observacao, area_id, cultura_id, data_plantio):
         conexao.commit()
         return cursor.rowcount > 0
     except Exception as e:
-        print(f"Erro ao atualizar plantio: {str(e)}")
-        return False
+        raise Exception(f"Erro ao atualizar plantio: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()
@@ -93,8 +87,7 @@ def deletar_por_id(id):
         conexao.commit()
         return cursor.rowcount > 0
     except Exception as e:
-        print(f"Erro ao deletar plantio: {str(e)}")
-        return False
+        raise Exception(f"Erro ao deletar plantio: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()

@@ -8,8 +8,7 @@ def pegar():
         areas = cursor.fetchall()
         return areas
     except Exception as e:
-        print(f"Erro ao buscar áreas: {str(e)}")
-        return None
+        raise Exception("Erro ao buscar áreas: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()
@@ -24,8 +23,7 @@ def pegar_por_id(id):
         area = cursor.fetchone()
         return area
     except Exception as e:
-        print(f"Erro ao buscar área por ID: {str(e)}")
-        return None
+        raise Exception(f"Erro ao buscar área por ID: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()
@@ -44,8 +42,7 @@ def criar(nome, localizacao, hectar):
         conexao.commit()
         return id_var.getvalue()[0]
     except Exception as e:
-        print(f"Erro ao criar área: {str(e)}")
-        return False
+        raise Exception(f"Erro ao criar área: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()
@@ -63,8 +60,7 @@ def atualizar_por_id(id, nome, localizacao, hectar):
         conexao.commit()
         return cursor.rowcount > 0
     except Exception as e:
-        print(f"Erro ao atualizar área: {str(e)}")
-        return False
+        raise Exception(f"Erro ao atualizar área: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()
@@ -79,8 +75,7 @@ def deletar_por_id(id):
         conexao.commit()
         return cursor.rowcount > 0
     except Exception as e:
-        print(f"Erro ao deletar área: {str(e)}")
-        return False
+        raise Exception(f"Erro ao deletar área: {str(e)}")
     finally:
         if 'cursor' in locals():
             cursor.close()

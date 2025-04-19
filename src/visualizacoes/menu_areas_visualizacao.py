@@ -20,37 +20,48 @@ def menu_areas():
             os.system("cls")
             match opcao:
                 case '1':
-                    pegar_areas()
+                    print('\n=== Áreas Cadastradas ===\n')
+                    areas = pegar_areas()
+                    print('\nÁreas Encontradas\n')
+                    print(areas)
                 case '2':
-                    print('\n=== Buscar Área ===')
+                    print('\n=== Buscar Área Por ID ===')
                     id = input('\nDigite o ID da área: ')
-                    pegar_area_por_id(id)
+                    area = pegar_area_por_id(id)
+                    print('\nÁrea Encontrada\n')
+                    print(area)
                 case '3':
                     print('\n=== Cadastrar Nova Área ===')
                     nome = input('\nDigite o nome da área: ')
                     localizacao = input('\nDigite a localização da área: ')
                     hectar_input = input('\nDigite o tamanho em hectares: ')
-                    criar_area(nome, localizacao, hectar_input)
+                    areas = criar_area(nome, localizacao, hectar_input)
+                    print('\nÁrea Criada com Sucesso!')
+                    print('\nÁrea criada:')
+                    print(areas)
                 case '4':
                     print('\n=== Alterar Área ===')
                     id = input('\nDigite o ID da área: ')
                     nome = input('\nDigite o novo nome da área: ')
                     localizacao = input('\nDigite a nova localização da área: ')
                     hectar_input = input('\nDigite o novo tamanho em hectares: ')
-                    atualizar_area_por_id(id, nome, localizacao, hectar_input)
+                    area = atualizar_area_por_id(id, nome, localizacao, hectar_input)
+                    print('\nÁrea atualizada com sucesso!')
+                    print('\nÁrea atualizada:')
+                    print(area)
                 case '5':
                     print('\n=== Deletar Área ===')
                     id = input('\nDigite o ID da área: ')
                     deletar_area_por_id(id)
+                    print('\nÁrea deletada com sucesso!')
                 case '0':
                     print('\nSaindo do menu de áreas...')
                     break
                 case _:
-                    os.system("cls")
-                    print('\nOpção inválida!')
-                    print('\nPor favor, escolha uma opção válida.')
+                    raise Exception("Opção inválida!")
         except Exception as e:
-            print(f'\nErro: {str(e)}')
-            print('\nPor favor, tente novamente.')
+            os.system("cls")
+            print(f'\nERRO')
+            print(f'\n\033[31m{str(e)}\033[0m')
         finally:
-            input("\nPressione ENTER")
+            input("\n\nPressione ENTER")

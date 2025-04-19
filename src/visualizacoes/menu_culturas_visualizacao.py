@@ -20,35 +20,46 @@ def menu_culturas():
             os.system("cls")
             match opcao:
                 case '1':
-                    pegar_culturas()
+                    print('\n=== Áreas Culturas ===\n')
+                    culturas = pegar_culturas()
+                    print('\nCulturas Encontradas\n')
+                    print(culturas)
                 case '2':
-                    print('\n=== Buscar Cultura ===')
+                    print('\n=== Buscar Cultura Por ID ===')
                     id = input('\nDigite o ID da cultura: ')
-                    pegar_cultura_por_id(id)
+                    cultura = pegar_cultura_por_id(id)
+                    print('\nCulturas Encontrada\n')
+                    print(cultura)
                 case '3':
                     print('\n=== Cadastrar Nova Cultura ===')
                     nome = input('\nDigite o nome da cultura: ')
                     consumo_hidrico = input('\nDigite o consumo hídrico diário (L/m²): ')
-                    criar_cultura(nome, consumo_hidrico)
+                    cultura = criar_cultura(nome, consumo_hidrico)
+                    print('\nCultura Criada com Sucesso!')
+                    print('\nCultura criada:')
+                    print(cultura)
                 case '4':
                     print('\n=== Alterar Cultura ===')
                     id = input('\nDigite o ID da cultura: ')
                     nome = input('\nDigite o novo nome da cultura: ')
                     consumo_hidrico = input('\nDigite o novo consumo hídrico diário (L/m²): ')
-                    atualizar_cultura_por_id(id, nome, consumo_hidrico)
+                    cultura = atualizar_cultura_por_id(id, nome, consumo_hidrico)
+                    print('\nCultura atualizada com sucesso!')
+                    print('\nCultura atualizada:')
+                    print(cultura)
                 case '5':
                     print('\n=== Deletar Cultura ===')
                     id = input('\nDigite o ID da cultura: ')
                     deletar_cultura_por_id(id)
+                    print('\nCultura deletada com sucesso!')
                 case '0':
                     print('\nSaindo do menu de culturas...')
                     break
                 case _:
-                    os.system("cls")
-                    print('\nOpção inválida!')
-                    print('\nPor favor, escolha uma opção válida.')
+                    raise Exception("Opção inválida!")
         except Exception as e:
-            print(f'\nErro: {str(e)}')
-            print('Por favor, tente novamente.')
+            os.system("cls")
+            print(f'\nERRO')
+            print(f'\n\033[31m{str(e)}\033[0m')
         finally:
             input("\nPressione ENTER")

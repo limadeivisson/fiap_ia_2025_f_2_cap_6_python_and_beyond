@@ -20,37 +20,48 @@ def menu_irrigacoes():
             os.system("cls")
             match opcao:
                 case '1':
-                    pegar_irrigacoes()
+                    print('\n=== Irrigações Cadastradas ===\n')
+                    irrigacoes = pegar_irrigacoes()
+                    print('\nIrrigações Encontradas\n')
+                    print(irrigacoes)
                 case '2':
-                    print('\n=== Buscar Irrigação ===')
+                    print('\n=== Buscar Irrigação Por ID ===')
                     id = input('\nDigite o ID da irrigação: ')
-                    pegar_irrigacao_por_id(id)
+                    irrigacao = pegar_irrigacao_por_id(id)
+                    print('\nIrrigação Encontrada\n')
+                    print(irrigacao)
                 case '3':
                     print('\n=== Registrar Irrigação ===')
                     plantio_id = input('\nDigite o ID do plantio: ')
                     data_irrigacao = input('\nDigite a data da irrigação (YYYY-MM-DD): ')
                     quantidade_agua = input('\nDigite a quantidade de água em litros: ')
-                    criar_irrigacao(plantio_id, data_irrigacao, quantidade_agua)
+                    irrigacao = criar_irrigacao(plantio_id, data_irrigacao, quantidade_agua)
+                    print('\nIrrigação Criada com Sucesso!')
+                    print('\nIrrigação criada:')
+                    print(irrigacao)
                 case '4':
                     print('\n=== Alterar Irrigação ===')
                     id = input('\nDigite o ID da irrigação: ')
                     plantio_id = input('\nDigite o novo ID do plantio: ')
                     data_irrigacao = input('\nDigite a nova data da irrigação (YYYY-MM-DD): ')
                     quantidade_agua = input('\nDigite a nova quantidade de água em litros: ')
-                    atualizar_irrigacao_por_id(id, plantio_id, data_irrigacao, quantidade_agua)
+                    irrigacao = atualizar_irrigacao_por_id(id, plantio_id, data_irrigacao, quantidade_agua)
+                    print('\nIrrigação atualizada com sucesso!')
+                    print('\nIrrigação atualizada:')
+                    print(irrigacao)
                 case '5':
                     print('\n=== Deletar Irrigação ===')
                     id = input('\nDigite o ID da irrigação: ')
                     deletar_irrigacao_por_id(id)
+                    print('\nIrrigação deletada com sucesso!')
                 case '0':
                     print('\nSaindo do menu de irrigações...')
                     break
                 case _:
-                    os.system("cls")
-                    print('\nOpção inválida!')
-                    print('\nPor favor, escolha uma opção válida.')
+                    raise Exception("Opção inválida!")
         except Exception as e:
-            print(f'\nErro: {str(e)}')
-            print('Por favor, tente novamente.')
+            os.system("cls")
+            print(f'\nERRO')
+            print(f'\n\033[31m{str(e)}\033[0m')
         finally:
             input("\nPressione ENTER")
