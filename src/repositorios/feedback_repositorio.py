@@ -4,7 +4,11 @@ def pegar():
     try:
         conexao = pegar_conexao()
         cursor = conexao.cursor()
-        cursor.execute('SELECT * FROM feedback')
+        cursor.execute('''
+            SELECT f.*, c.nome as cultura_nome 
+            FROM feedback f 
+            JOIN cultura c ON f.cultura_id = c.id
+        ''')
         feedbacks = cursor.fetchall()
         return feedbacks
     except Exception as e:
@@ -19,7 +23,12 @@ def pegar_por_id(id):
     try:
         conexao = pegar_conexao()
         cursor = conexao.cursor()
-        cursor.execute('SELECT * FROM feedback WHERE id = :1', [id])
+        cursor.execute('''
+            SELECT f.*, c.nome as cultura_nome 
+            FROM feedback f 
+            JOIN cultura c ON f.cultura_id = c.id 
+            WHERE f.id = :1
+        ''', [id])
         feedback = cursor.fetchone()
         return feedback
     except Exception as e:

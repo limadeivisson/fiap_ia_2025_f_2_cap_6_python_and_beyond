@@ -9,7 +9,8 @@ def pegar_feedbacks():
         'cultura_id': feedback[1],
         'message_feedback': feedback[2],
         'tips': feedback[3],
-        'percent': feedback[4]
+        'percent': feedback[4],
+        'cultura_nome': feedback[5]
     } for feedback in feedbacks]
     df = pd.DataFrame(feedbacks_formatados)
     return df.to_string(index=False)
@@ -24,7 +25,8 @@ def pegar_feedback_por_id(id):
         'cultura_id': feedback[1],
         'message_feedback': feedback[2],
         'tips': feedback[3],
-        'percent': feedback[4]
+        'percent': feedback[4],
+        'cultura_nome': feedback[5]
     }
 
 def criar_feedback(cultura_id, message_feedback, tips, percent_input):
@@ -38,7 +40,8 @@ def criar_feedback(cultura_id, message_feedback, tips, percent_input):
             'cultura_id': feedback[1],
             'message_feedback': feedback[2],
             'tips': feedback[3],
-            'percent': feedback[4]
+            'percent': feedback[4],
+            'cultura_nome': feedback[5]
         }
     else:
         raise Exception("Erro ao criar feedback!")
@@ -56,7 +59,8 @@ def atualizar_feedback_por_id(id, cultura_id, message_feedback, tips, percent_in
             'cultura_id': feedback_atualizado[1],
             'message_feedback': feedback_atualizado[2],
             'tips': feedback_atualizado[3],
-            'percent': feedback_atualizado[4]
+            'percent': feedback_atualizado[4],
+            'cultura_nome': feedback_atualizado[5]
         }
     else:
         raise Exception("Erro ao atualizar feedback!")
