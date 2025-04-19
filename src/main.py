@@ -5,7 +5,7 @@ from visualizacoes.menu_irrigacoes_visualizacao import menu_irrigacoes
 import os
 
 def exibir_menu():
-    print('\n=== Gestão Hidrica ===')
+    print('\n=== Sistema Gestão Hídrica ===')
     print('\n=== Menu Principal ===\n')
     print('1. Áreas')
     print('2. Culturas')
@@ -33,7 +33,10 @@ def main():
                     print('\nSaindo do sistema...')
                     break
                 case _:
-                    print('\nOpção inválida! Por favor, escolha uma opção válida.')
+                    os.system("cls")
+                    print('\nOpção inválida!')
+                    print('\nPor favor, escolha uma opção válida.')
+                    input("\nPressione ENTER")
         except Exception as e:
             print(f'\nErro: {str(e)}')
             print('Por favor, tente novamente.')

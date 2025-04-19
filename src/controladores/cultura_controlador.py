@@ -6,7 +6,7 @@ def pegar_culturas():
     try:
         culturas = cultura_repositorio.pegar()
         if culturas is None:
-            print('\nErro ao buscar culturas')
+            print('\n\033[31mErro ao buscar culturas\033[0m')
             return
         culturas_formatadas = [{
             'id': cultura[0],
@@ -14,20 +14,20 @@ def pegar_culturas():
             'consumo_hidrico_diario_l_m2': cultura[2]
         } for cultura in culturas]
         df = pd.DataFrame(culturas_formatadas)
-        print('\nCulturas Cadastradas\n')
+        print('\n=== Culturas Cadastradas ===\n')
         print(df.to_string(index=False))
     except Exception as e:
-        print(f'\nErro ao processar culturas: {str(e)}')
+        print(f'\n\033[31mErro ao processar culturas: {str(e)}\033[0m')
 
 def pegar_cultura_por_id(id):
     try:
         erro = validar_pegar_cultura_por_id(id)
         if erro:
-            print(f'Erro: {erro}')
+            print(f'\n\033[31mErro: {erro}\033[0m')
             return
         cultura = cultura_repositorio.pegar_por_id(id)
         if cultura is None:
-            print('\nCultura não encontrada')
+            print('\n\033[31mCultura não encontrada\033[0m')
             return
         cultura_formatada = {
             'id': cultura[0],
@@ -38,13 +38,13 @@ def pegar_cultura_por_id(id):
         print('\nCultura Encontrada\n')
         print(df.to_string(index=False))
     except Exception as e:
-        print(f'\nErro ao buscar cultura: {str(e)}')
+        print(f'\n\033[31mErro ao buscar cultura: {str(e)}\033[0m')
 
 def criar_cultura(nome, consumo_hidrico_diario_l_m2_input):
     try:
         erro = validar_criar_cultura(nome, consumo_hidrico_diario_l_m2_input)
         if erro:
-            print(f'\nErro: {erro}')
+            print(f'\n\033[31mErro: {erro}\033[0m')
             return
         consumo_hidrico_diario_l_m2 = float(consumo_hidrico_diario_l_m2_input)
         id_cultura = cultura_repositorio.criar(nome, consumo_hidrico_diario_l_m2)
@@ -60,21 +60,21 @@ def criar_cultura(nome, consumo_hidrico_diario_l_m2_input):
             print('\nCultura criada:')
             print(df.to_string(index=False))
         else:
-            print('\nErro ao criar cultura')
+            print('\n\033[31mErro ao criar cultura\033[0m')
     except ValueError:
-        print('\nErro: Os valores numéricos devem ser números válidos')
+        print('\n\033[31mErro: Os valores numéricos devem ser números válidos\033[0m')
     except Exception as e:
-        print(f'\nErro ao criar cultura: {str(e)}')
+        print(f'\n\033[31mErro ao criar cultura: {str(e)}\033[0m')
 
 def atualizar_cultura_por_id(id, nome, consumo_hidrico_diario_l_m2_input):
     try:
         erro = validar_atualizar_cultura(id, nome, consumo_hidrico_diario_l_m2_input)
         if erro:
-            print(f'Erro: {erro}')
+            print(f'\n\033[31mErro: {erro}\033[0m')
             return
         cultura = cultura_repositorio.pegar_por_id(id)
         if cultura is None:
-            print('\nCultura não encontrada')
+            print('\n\033[31mCultura não encontrada\033[0m')
             return
         consumo_hidrico_diario_l_m2 = float(consumo_hidrico_diario_l_m2_input)
         if cultura_repositorio.atualizar_por_id(id, nome, consumo_hidrico_diario_l_m2):
@@ -89,25 +89,25 @@ def atualizar_cultura_por_id(id, nome, consumo_hidrico_diario_l_m2_input):
             print('\nCultura atualizada:')
             print(df.to_string(index=False))
         else:
-            print('\nErro ao atualizar cultura')
+            print('\n\033[31mErro ao atualizar cultura\033[0m')
     except ValueError:
-        print('\nErro: Os valores numéricos devem ser números válidos')
+        print('\n\033[31mErro: Os valores numéricos devem ser números válidos\033[0m')
     except Exception as e:
-        print(f'\nErro ao atualizar cultura: {str(e)}')
+        print(f'\n\033[31mErro ao atualizar cultura: {str(e)}\033[0m')
 
 def deletar_cultura_por_id(id):
     try:
         erro = validar_deletar_cultura(id)
         if erro:
-            print(f'Erro: {erro}')
+            print(f'\n\033[31mErro: {erro}\033[0m')
             return
         cultura = cultura_repositorio.pegar_por_id(id)
         if cultura is None:
-            print('\nCultura não encontrada')
+            print('\n\033[31mCultura não encontrada\033[0m')
             return
         if cultura_repositorio.deletar_por_id(id):
             print('\nCultura deletada com sucesso!')
         else:
-            print('\nErro ao deletar cultura')
+            print('\n\033[31mErro ao deletar cultura\033[0m')
     except Exception as e:
-        print(f'\nErro ao deletar cultura: {str(e)}')
+        print(f'\n\033[31mErro ao deletar cultura: {str(e)}\033[0m')

@@ -6,7 +6,7 @@ def pegar_areas():
     try:
         areas = area_repositorio.pegar()
         if areas is None:
-            print('\nErro ao buscar áreas')
+            print('\n\n\033[31mErro ao buscar áreas\033[0m')
             return
         areas_formatadas = [{
             'id': area[0],
@@ -15,20 +15,20 @@ def pegar_areas():
             'hectar': area[3]
         } for area in areas]
         df = pd.DataFrame(areas_formatadas)
-        print('\nÁreas Cadastradas\n')
+        print('\n=== Áreas Cadastradas ===\n')
         print(df.to_string(index=False))
     except Exception as e:
-        print(f'\nErro ao processar áreas: {str(e)}')
+        print(f'\n\033[31mErro ao processar áreas: {str(e)}\033[0m')
 
 def pegar_area_por_id(id):
     try:
         erro = validar_pegar_area_por_id(id)
         if erro:
-            print(f'Erro: {erro}')
+            print(f'\n\033[31mErro: {erro}\033[0m')
             return
         area = area_repositorio.pegar_por_id(id)
         if area is None:
-            print('\nÁrea não encontrada')
+            print('\n\033[31mÁrea não encontrada\033[0m')
             return
         area_formatada = {
             'id': area[0],
@@ -40,13 +40,13 @@ def pegar_area_por_id(id):
         print('\nÁrea Encontrada\n')
         print(df.to_string(index=False))
     except Exception as e:
-        print(f'\nErro ao buscar área: {str(e)}')
+        print(f'\n\033[31mErro ao buscar área: {str(e)}\033[0m')
 
 def criar_area(nome, localizacao, hectar_input):
     try:
         erro = validar_criar_area(nome, localizacao, hectar_input)
         if erro:
-            print(f'\nErro: {erro}')
+            print(f'\n\033[31mErro: {erro}\033[0m')
             return
             
         hectar = float(hectar_input)
@@ -64,21 +64,21 @@ def criar_area(nome, localizacao, hectar_input):
             print('\nÁrea criada:')
             print(df.to_string(index=False))
         else:
-            print('\nErro ao criar área')
+            print('\n\033[31mErro ao criar área\033[0m')
     except ValueError:
-        print('\nErro: O valor de hectares deve ser um número')
+        print('\n\033[31mErro: O valor de hectares deve ser um número\033[0m')
     except Exception as e:
-        print(f'\nErro ao criar área: {str(e)}')
+        print(f'\n\033[31mErro ao criar área: {str(e)}\033[0m')
 
 def atualizar_area_por_id(id, nome, localizacao, hectar_input):
     try:
         erro = validar_atualizar_area(id, nome, localizacao, hectar_input)
         if erro:
-            print(f'Erro: {erro}')
+            print(f'\n\033[31mErro: {erro}\033[0m')
             return
         area = area_repositorio.pegar_por_id(id)
         if area is None:
-            print('\nÁrea não encontrada')
+            print('\n\033[31mÁrea não encontrada\033[0m')
             return
         hectar = float(hectar_input)
         if area_repositorio.atualizar_por_id(id, nome, localizacao, hectar):
@@ -94,11 +94,11 @@ def atualizar_area_por_id(id, nome, localizacao, hectar_input):
             print('\nÁrea atualizada:')
             print(df.to_string(index=False))
         else:
-            print('\nErro ao atualizar área')
+            print('\n\033[31mErro ao atualizar área\033[0m')
     except ValueError:
-        print('\nErro: O valor de hectares deve ser um número')
+        print('\n\033[31mErro: O valor de hectares deve ser um número\033[0m')
     except Exception as e:
-        print(f'\nErro ao atualizar área: {str(e)}')
+        print(f'\n\033[31mErro ao atualizar área: {str(e)}\033[0m')
 
 def deletar_area_por_id(id):
     try:
@@ -108,11 +108,11 @@ def deletar_area_por_id(id):
             return
         area = area_repositorio.pegar_por_id(id)
         if area is None:
-            print('\nÁrea não encontrada')
+            print('\n\033[31mÁrea não encontrada\033[0m')
             return
         if area_repositorio.deletar_por_id(id):
             print('\nÁrea deletada com sucesso!')
         else:
-            print('\nErro ao deletar área')
+            print('\n\033[31mErro ao deletar área\033[0m')
     except Exception as e:
-        print(f'\nErro ao deletar área: {str(e)}')
+        print(f'\n\033[31mErro ao deletar área: {str(e)}\033[0m')

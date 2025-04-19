@@ -7,7 +7,7 @@ def pegar_plantios():
     try:
         plantios = plantio_repositorio.pegar()
         if plantios is None:
-            print('\nErro ao buscar plantios')
+            print('\n\033[31mErro ao buscar plantios\033[0m')
             return
         plantios_formatados = [{
             'id': plantio[0],
@@ -18,20 +18,20 @@ def pegar_plantios():
             'data_plantio': plantio[7].strftime('%Y-%m-%d')
         } for plantio in plantios]
         df = pd.DataFrame(plantios_formatados)
-        print('\nPlantios Cadastrados\n')
+        print('\n=== Plantios Cadastrados ===\n')
         print(df.to_string(index=False))
     except Exception as e:
-        print(f'\nErro ao processar plantios: {str(e)}')
+        print(f'\n\033[31mErro ao processar plantios: {str(e)}\033[0m')
 
 def pegar_plantio_por_id(id):
     try:
         erro = validar_pegar_plantio_por_id(id)
         if erro:
-            print(f'Erro: {erro}')
+            print(f'\n\033[31mErro: {erro}\033[0m')
             return
         plantio = plantio_repositorio.pegar_por_id(id)
         if plantio is None:
-            print('\nPlantio não encontrado')
+            print('\n\033[31mPlantio não encontrado\033[0m')
             return
         plantio_formatado = {
             'id': plantio[0],
@@ -45,13 +45,13 @@ def pegar_plantio_por_id(id):
         print('\nPlantio Encontrado\n')
         print(df.to_string(index=False))
     except Exception as e:
-        print(f'\nErro ao buscar plantio: {str(e)}')
+        print(f'\n\033[31mErro ao buscar plantio: {str(e)}\033[0m')
 
 def criar_plantio(nome, observacao, area_id, cultura_id, data_plantio_input):
     try:
         erro = validar_criar_plantio(nome, observacao, area_id, cultura_id, data_plantio_input)
         if erro:
-            print(f'\nErro: {erro}')
+            print(f'\n\033[31mErro: {erro}\033[0m')
             return
             
         data_plantio = datetime.strptime(data_plantio_input, '%Y-%m-%d')
@@ -72,21 +72,21 @@ def criar_plantio(nome, observacao, area_id, cultura_id, data_plantio_input):
             print('\nPlantio criado:')
             print(df.to_string(index=False))
         else:
-            print('\nErro ao criar plantio')
+            print('\n\033[31mErro ao criar plantio\033[0m')
     except ValueError as e:
-        print(f'\nErro: {str(e)}')
+        print(f'\n\033[31mErro: {str(e)}\033[0m')
     except Exception as e:
-        print(f'\nErro ao criar plantio: {str(e)}')
+        print(f'\n\033[31mErro ao criar plantio: {str(e)}\033[0m')
 
 def atualizar_plantio_por_id(id, nome, observacao, area_id, cultura_id, data_plantio_input):
     try:
         erro = validar_atualizar_plantio(id, nome, observacao, area_id, cultura_id, data_plantio_input)
         if erro:
-            print(f'Erro: {erro}')
+            print(f'\n\033[31mErro: {erro}\033[0m')
             return
         plantio = plantio_repositorio.pegar_por_id(id)
         if plantio is None:
-            print('\nPlantio não encontrado')
+            print('\n\033[31mPlantio não encontrado\033[0m')
             return
             
         data_plantio = datetime.strptime(data_plantio_input, '%Y-%m-%d')
@@ -106,17 +106,17 @@ def atualizar_plantio_por_id(id, nome, observacao, area_id, cultura_id, data_pla
             print('\nPlantio atualizado:')
             print(df.to_string(index=False))
         else:
-            print('\nErro ao atualizar plantio')
+            print('\n\033[31mErro ao atualizar plantio\033[0m')
     except ValueError as e:
-        print(f'\nErro: {str(e)}')
+        print(f'\n\033[31mErro: {str(e)}\033[0m')
     except Exception as e:
-        print(f'\nErro ao atualizar plantio: {str(e)}')
+        print(f'\n\033[31mErro ao atualizar plantio: {str(e)}\033[0m')
 
 def deletar_plantio_por_id(id):
     try:
         erro = validar_deletar_plantio(id)
         if erro:
-            print(f'Erro: {erro}')
+            print(f'\n\033[31mErro: {erro}\033[0m')
             return
         plantio = plantio_repositorio.pegar_por_id(id)
         if plantio is None:
@@ -125,6 +125,6 @@ def deletar_plantio_por_id(id):
         if plantio_repositorio.deletar_por_id(id):
             print('\nPlantio deletado com sucesso!')
         else:
-            print('\nErro ao deletar plantio')
+            print('\n\033[31mErro ao deletar plantio\033[0m')
     except Exception as e:
-        print(f'\nErro ao deletar plantio: {str(e)}')
+        print(f'\n\033[31mErro ao deletar plantio: {str(e)}\033[0m')

@@ -22,25 +22,31 @@ def menu_culturas():
                 case '1':
                     pegar_culturas()
                 case '2':
+                    print('\n=== Buscar Cultura ===')
                     id = input('\nDigite o ID da cultura: ')
                     pegar_cultura_por_id(id)
                 case '3':
+                    print('\n=== Cadastrar Nova Cultura ===')
                     nome = input('\nDigite o nome da cultura: ')
                     consumo_hidrico = input('\nDigite o consumo hídrico diário (L/m²): ')
                     criar_cultura(nome, consumo_hidrico)
                 case '4':
+                    print('\n=== Alterar Cultura ===')
                     id = input('\nDigite o ID da cultura: ')
                     nome = input('\nDigite o novo nome da cultura: ')
                     consumo_hidrico = input('\nDigite o novo consumo hídrico diário (L/m²): ')
                     atualizar_cultura_por_id(id, nome, consumo_hidrico)
                 case '5':
+                    print('\n=== Deletar Cultura ===')
                     id = input('\nDigite o ID da cultura: ')
                     deletar_cultura_por_id(id)
                 case '0':
                     print('\nSaindo do menu de culturas...')
                     break
                 case _:
-                    print('\nOpção inválida! Por favor, escolha uma opção válida de culturas.')
+                    os.system("cls")
+                    print('\nOpção inválida!')
+                    print('\nPor favor, escolha uma opção válida.')
         except Exception as e:
             print(f'\nErro: {str(e)}')
             print('Por favor, tente novamente.')
