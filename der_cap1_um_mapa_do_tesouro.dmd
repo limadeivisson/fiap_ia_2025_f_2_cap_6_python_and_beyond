@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="der_cap1_um_mapa_do_tesouro_V2" id="940799FF-74D8-282A-8C54-665B68FD25EF" version="3.5">
+<createdBy>deivi</createdBy>
+<createdTime>2025-04-19 23:05:40 UTC</createdTime>
+<ownerDesignName>der_cap1_um_mapa_do_tesouro_V2</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>940799FF-74D8-282A-8C54-665B68FD25EF</designId>
+<usedDesignStorageDescriptors>
+<designDescr class="oracle.dbtools.crest.model.design.Design$DesignStorageDesc" id="2B893FAC-095E-F508-E076-9ABB9650BBC9">
+<designStoragePath>C:\um_mapa_do_tesouro</designStoragePath>
+</designDescr>
+</usedDesignStorageDescriptors>
+</OSDM_Design>
